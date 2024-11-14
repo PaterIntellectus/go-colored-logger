@@ -3,29 +3,29 @@ package logger
 import (
 	"io"
 
-	"github.com/PaterIntellectus/almaray-gateway/internal/utils/ansi"
+	"github.com/PaterIntellectus/go-colored-logger/ansi"
 )
 
 // don't use colored writer with files
-type Writer struct {
+type ColoredWriter struct {
 	writer          io.Writer
 	foregroundColor ansi.ForegroundColor
 	backgroundColor ansi.BackgroundColor
 }
 
-func NewWriter(
+func NewColoredWriter(
 	writer io.Writer,
 	foregroundColor ansi.ForegroundColor,
 	backgroundColor ansi.BackgroundColor,
-) *Writer {
-	return &Writer{
+) *ColoredWriter {
+	return &ColoredWriter{
 		writer:          writer,
 		foregroundColor: foregroundColor,
 		backgroundColor: backgroundColor,
 	}
 }
 
-func (cw *Writer) Write(p []byte) (n int, err error) {
+func (cw *ColoredWriter) Write(p []byte) (n int, err error) {
 	if cw.foregroundColor == 0 {
 		return cw.writer.Write(p)
 	} else {
