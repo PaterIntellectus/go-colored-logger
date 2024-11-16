@@ -2,33 +2,27 @@ package ansi
 
 import "fmt"
 
-type BackgroundColor Code
-
 const (
-	BackgroundBlack   BackgroundColor = 40
-	BackgroundRed     BackgroundColor = 41
-	BackgroundGreen   BackgroundColor = 42
-	BackgroundYellow  BackgroundColor = 43
-	BackgroundBlue    BackgroundColor = 44
-	BackgroundMagenta BackgroundColor = 45
-	BackgroundCyan    BackgroundColor = 46
-	BackgroundWhite   BackgroundColor = 47
+	BackgroundBlack   Code = 40
+	BackgroundRed     Code = 41
+	BackgroundGreen   Code = 42
+	BackgroundYellow  Code = 43
+	BackgroundBlue    Code = 44
+	BackgroundMagenta Code = 45
+	BackgroundCyan    Code = 46
+	BackgroundWhite   Code = 47
 
-	BackgroundBrightBlack   BackgroundColor = 100
-	BackgroundBrightRed     BackgroundColor = 101
-	BackgroundBrightGreen   BackgroundColor = 102
-	BackgroundBrightYellow  BackgroundColor = 103
-	BackgroundBrightBlue    BackgroundColor = 104
-	BackgroundBrightMagenta BackgroundColor = 105
-	BackgroundBrightCyan    BackgroundColor = 106
-	BackgroundBrightWhite   BackgroundColor = 107
+	BackgroundBrightBlack   Code = 100
+	BackgroundBrightRed     Code = 101
+	BackgroundBrightGreen   Code = 102
+	BackgroundBrightYellow  Code = 103
+	BackgroundBrightBlue    Code = 104
+	BackgroundBrightMagenta Code = 105
+	BackgroundBrightCyan    Code = 106
+	BackgroundBrightWhite   Code = 107
 )
 
-func (fc BackgroundColor) String() string {
-	return Code(fc).String()
-}
-
-func GetBackgroundColor(r int, g int, b int) string {
+func BackgroundFromRGB(r int, g int, b int) string {
 	return fmt.Sprintf(
 		"\x1b[48;2;%d;%d;%dm",
 		r, g, b,

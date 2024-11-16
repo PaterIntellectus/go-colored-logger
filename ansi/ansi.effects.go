@@ -1,22 +1,20 @@
 package ansi
 
-type Effect Code
-
 const (
-	Bold         Effect = 1
-	Faint        Effect = 2
-	Italic       Effect = 3
-	Underline    Effect = 4
-	BlinkSlow    Effect = 5
-	BlinkFast    Effect = 6
-	ReverseVideo Effect = 7
-	Conceal      Effect = 8
-	CrossedOut   Effect = 9
+	Bold         Code = 1
+	Faint        Code = 2
+	Italic       Code = 3
+	Underline    Code = 4
+	BlinkSlow    Code = 5
+	BlinkFast    Code = 6
+	ReverseVideo Code = 7
+	Conceal      Code = 8
+	CrossedOut   Code = 9
 
-	Fraktur         Effect = 20
-	DoubleUnderline Effect = 21
+	Fraktur         Code = 20
+	DoubleUnderline Code = 21
 
-	Framed    Effect = 51
-	Encircled Effect = 52
-	Overlined Effect = 53
+	Framed    Code = 51
+	Encircled Code = 52
+	Overlined Code = 53
 )

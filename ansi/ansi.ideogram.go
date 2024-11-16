@@ -1,15 +1,9 @@
 package ansi
 
-type Ideogram Code
-
 const (
-	IdeogramUnderlined      Ideogram = 60
-	IdeogramDoubleUnderline Ideogram = 61
-	IdeogramOverline        Ideogram = 62
-	IdeogramDoubleOverline  Ideogram = 63
-	IdeogramStressMarking   Ideogram = 64
+	CodeUnderlined      Code = 60
+	CodeDoubleUnderline Code = 61
+	CodeOverline        Code = 62
+	CodeDoubleOverline  Code = 63
+	CodeStressMarking   Code = 64
 )
-
-func (i Ideogram) String() string {
-	return Code(i).String()
-}
