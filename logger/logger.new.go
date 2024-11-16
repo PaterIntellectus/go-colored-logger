@@ -8,7 +8,7 @@ import (
 	"github.com/PaterIntellectus/go-colored-logger/ansi"
 )
 
-func New(options *Options) *LoggerImpl {
+func New(options *options) Logger {
 	var infoWriters []io.Writer
 	var warningWriters []io.Writer
 	var errorWriters []io.Writer
@@ -31,35 +31,17 @@ func New(options *Options) *LoggerImpl {
 		fatalWriters = append(fatalWriters, file)
 	}
 
-	if options.Stdout {
-		infoWriters = append(infoWriters, NewColoredWriter(
-			os.Stdout,
-			ansi.ForegroundBrightBlue,
-			ansi.BackgroundColor(ansi.ResetAll),
-		))
-		warningWriters = append(warningWriters, NewColoredWriter(
-			os.Stdout,
-			ansi.ForegroundBrightYellow,
-			ansi.BackgroundColor(ansi.ResetAll),
-		))
-		errorWriters = append(errorWriters, NewColoredWriter(
-			os.Stdout,
-			ansi.ForegroundBrightRed,
-			ansi.BackgroundColor(ansi.ResetAll),
-		))
-		fatalWriters = append(fatalWriters, NewColoredWriter(
-			os.Stdout,
-			ansi.ForegroundMagenta,
-			ansi.BackgroundColor(ansi.ResetAll),
-		))
+	if options.IsStdout {
+		infoWriters = append(infoWriters, NewAnsiWriter(os.Stdout, ansi.ForegroundBrightBlue))
+		warningWriters = append(warningWriters, NewAnsiWriter(os.Stdout, ansi.ForegroundBrightYellow))
+		errorWriters = append(errorWriters, NewAnsiWriter(os.Stderr, ansi.ForegroundBrightRed))
+		fatalWriters = append(fatalWriters, NewAnsiWriter(os.Stderr, ansi.ForegroundBrightMagenta))
 	}
 
-	defaultWriterFlags := log.Ldate | log.Ltime
-
 	return &LoggerImpl{
-		infoLogger:    log.New(io.MultiWriter(infoWriters...), "[INFO] ", defaultWriterFlags),
-		warningLogger: log.New(io.MultiWriter(warningWriters...), "[WARNING] ", defaultWriterFlags),
-		errorLogger:   log.New(io.MultiWriter(errorWriters...), "[ERROR] ", defaultWriterFlags),
-		fatalLogger:   log.New(io.MultiWriter(fatalWriters...), "[FATAL] ", defaultWriterFlags),
+		infoLogger:    log.New(io.MultiWriter(infoWriters...), "[INFO]  ", options.Flag),
+		warningLogger: log.New(io.MultiWriter(warningWriters...), "[WARN]  ", options.Flag),
+		errorLogger:   log.New(io.MultiWriter(errorWriters...), "[ERROR] ", options.Flag),
+		fatalLogger:   log.New(io.MultiWriter(fatalWriters...), "[FATAL] ", options.Flag),
 	}
 }
