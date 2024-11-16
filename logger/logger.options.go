@@ -1,17 +1,30 @@
 package logger
 
-// To disable file logging set filename to ""
-type Options struct {
+type options struct {
 	Filename string
-	Stdout   bool
+	IsStdout bool
+	Flag     int
 }
 
 func NewOptions(
 	filename string,
-	stdout bool,
-) *Options {
-	return &Options{
+	isStdout bool,
+	flag int,
+) *options {
+	return &options{
 		Filename: filename,
-		Stdout:   stdout,
+		IsStdout: isStdout,
+		Flag:     flag,
+	}
+}
+
+func NewOptionsWithDefaultFlags(
+	filename string,
+	isStdout bool,
+) *options {
+	return &options{
+		Filename: filename,
+		IsStdout: isStdout,
+		Flag:     DefaultFlags,
 	}
 }
